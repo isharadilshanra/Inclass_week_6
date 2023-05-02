@@ -3,21 +3,29 @@ using namespace std;
 
 // function to heapify the tree
 void heapify(int arr[], int n, int root)
-{
-    int largest = root;
-    int left = 2 * root + 1;
-    int right = 2 * root + 2;
+{  int maxnode=root;
+   int leftnode=2*root+1;
+   int rightnode=2*root+2;
+   // find max node and make the root 
+   if(arr[leftnode]>arr[maxnode]&&n>leftnode){
+      maxnode=leftnode;
 
-    if (left < n && arr[left] > arr[largest])
-        largest = left;
+   }
+   if(arr[rightnode]>arr[maxnode]&&n>rightnode){
+      maxnode=rightnode;
 
-    if (right < n && arr[right] > arr[largest])
-        largest = right;
+   }
+   // if (arr[maxnode]<=arr[leftnode]){
+   //    maxnode=leftnode;
+   // }
+   //  if (arr[maxnode]<=arr[rightnode]){
+   //    maxnode=rightnode;
+   // }
+   if (maxnode!=root){
+      swap(arr[root],arr[maxnode]);
+      heapify(arr,n,maxnode);
+   }
 
-    if (largest != root) {
-        swap(arr[root], arr[largest]);
-        heapify(arr, n, largest);
-    }
 }
 
 // implementing heap sort
